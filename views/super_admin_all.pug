@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/semantic.css")
+        link(rel="stylesheet", href="/css/main.css")
+    body 
+        .ui.top.fixed.menu
+            .item
+                img.logo-img(src='/images/uzstat.png')
+            .user-name=name
+        .my-container
+            .ui.styled.accordion(style="width:100%")
+                each answer in json
+                    .title.accordion-title(data-name=`${answer.name}`, data-id=`${answer.id}`)
+                        i.dropdown.icon(data-name=`${answer.name}`, data-id=`${answer.id}`)
+                        span(data-name=`${answer.name}`, data-id=`${answer.id}`)
+                            != `${answer.test.question.uz} <br/> ${answer.test.question.ru}`
+                    .content(data-open=`${answer.name}`)
+                        table.ui.celled.table
+                            thead
+                                tr
+                                    if answer.test.answers
+                                        each ans in answer.test.answers
+                                            th=`${ans.text.uz} (${ans.text.ru})`
+                                        th Изоҳ (Комментарий) 
+                                    else 
+                                        th ...
+                                        th ...
+                                        th Изоҳ (Комментарий)
+                            tbody(data-open-table=`${answer.name}`)
+        script(src="/js/jquery.js")
+        script(src="/js/axios.js")
+        script(src="/js/semantic.min.js")
+        script(src="/js/semantic.js")
+        script(src="/js/questionnaire.js")

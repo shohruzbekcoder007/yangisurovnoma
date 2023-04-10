@@ -1,0 +1,50 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/semantic.css")
+        link(rel="stylesheet", href="/css/main.css")
+    body 
+        .ui.top.fixed.menu
+            .item
+                img.logo-img(src='/images/uzstat.png')
+            .user-name=name
+            .clock-wrap
+                .clock.pro-0
+                    .count
+        form(action="/fulltest/corrects", method="post").ui.container.my-container
+            if again
+                .ui.info.message.transition
+                    .header Ushbu testni qaytadan ishlayapsiz
+                    ul.list
+                        li Barcha urinishlar saqlab qolinadi.
+                        li Birinchi urinish asosiy natija sifatida qaraladi.
+                        li Qayta ishlashni tavsiya qilamiz.
+            each test in testlist
+                .ui.piled.segment
+                    h4.ui.block.header=test.text_question.question_text
+                    .my-test-body 
+                        .ui.form
+                            .grouped.fields
+                                .field
+                                    .ui.radio.checkbox
+                                        input(type="radio", value=test.test_answer1._id name=test._id, checked)
+                                        label=test.test_answer1.answer_text
+                                .field
+                                    .ui.radio.checkbox
+                                        input(type="radio", value=test.test_answer2._id name=test._id)
+                                        label=test.test_answer2.answer_text
+                                .field
+                                    .ui.radio.checkbox
+                                        input(type="radio", value=test.test_answer3._id name=test._id)
+                                        label=test.test_answer3.answer_text
+                                .field
+                                    .ui.radio.checkbox
+                                        input(type="radio", value=test.test_answer4._id name=test._id)
+                                        label=test.test_answer4.answer_text
+            button(type="submit").ui.primary.button Yuborish
+        script(src="/js/jquery.js") 
+        script(src="/js/main.js") 

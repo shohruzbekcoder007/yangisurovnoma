@@ -1,0 +1,63 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/semantic.css")
+        link(rel="stylesheet", href="/css/main.css")
+    body 
+        .ui.top.fixed.menu.cf
+            .item.left
+                //- img.logo-img(src='/images/old_logo-top.1f1eb02.png' style="width: 60px !important;")
+            //- if name 
+            //-     .user-name=name
+            //- else 
+            //-         .user-name Ichki ishar vazirligi Toshkent shahar boshqarmasi
+            .item.right
+                a(href='/user/login').ui.primary.button Kirish
+        form(action="/fulltest/correctsforall", method="post")#answer_form.ui.container.my-container
+            .ui.info.message.transition
+                .header Ҳурматли хамкасблар !!!
+                ul.list
+                    li Мазкур аноним сўровнома мутахассисларга қулай шароит яратиб бериш ҳамда аккредитация жараёнида аниқланган муаммоларни ҳал этиш мақсадида ўтказилмоқда.
+                    li Изоҳ сўралган жойларда масаланинг сабаби, ечими ёки таклифлар кўрсатилмаса, жавоб қабул қилинмайди!!!
+            .ui.info.message.transition
+                .header Уважаемые коллеги!!!
+                ul.list
+                    li Данный анонимный опрос проводится в целях улучшения условий для специалистов, а также решения проблем возникающих в процессе аккредитации.
+                    li При отсутствии комментариев в требуемых местах, ответ принят не будет!!! 
+            each test in json
+                .ui.piled.segment
+                    h4.ui.block.header
+                        !=test.test.question.uz+'</br>'+test.test.question.ru
+                    if test.type == "simple"
+                        .my-test-body
+                            .ui.form
+                                .grouped.fields
+                                    each answer in test.test.answers
+                                        .field
+                                            .ui.radio.checkbox.w100
+                                                if answer.type == "withinput"
+                                                    input(type="radio", value=answer.text.value name=test.name data-target=`${test.id}` onchange="handleChange(event)")
+                                                    label
+                                                        !=answer.text.uz+'<br/>'+answer.text.ru
+                                                    .ui.input.margin-top-10.dbn(data-for-css=`${test.id}`)
+                                                        input(type="text" placeholder="кўрсатиб ўтинг(изложите их)..." name=test.name+"_input" data-required="false" data-for=`${test.id}`)
+                                                else 
+                                                    input(type="radio", value=answer.text.value name=test.name data-target=`${test.id}` onchange="handleChange1(event)")
+                                                    label
+                                                        !=answer.text.uz+'<br/>'+answer.text.ru
+                    else 
+                        .my-test-body
+                            .ui.form
+                                .grouped.fields
+                                    .field
+                                        .ui.input.margin-top-10
+                                            input(type="text" name="input_"+test.name placeholder="Изоҳ (Комментарий)..." data-required="true" data-for=`${test.id}`)
+            button(type="submit").ui.primary.button Yuborish
+        script(src="/js/answers.js")
+        script(src="/js/axios.js") 
+        script(src="/js/jquery.js") 
+        script(src="/js/main_all.js")
