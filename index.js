@@ -33,7 +33,7 @@ app.use(express.static('./static'));
 app.set("view engine", "pug");
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://forhumoyun_aka:forhumoyun_aka@cluster0.ycg5joo.mongodb.net/forhumoyun_aka1?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://forhumoyun_aka:forhumoyun_aka@cluster0.ycg5joo.mongodb.net/forhumoyun_aka2?retryWrites=true&w=majority')
   .then(() => {
     console.log('MongoDBga ulanish hosil qilindi...');
   })
