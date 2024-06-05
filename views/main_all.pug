@@ -28,10 +28,12 @@ html(lang="en")
                 ul.list
                     li Данный опрос проводится в целях улучшения условий для специалистов, а также решения проблем возникающих в процессе аккредитации.
                     li При отсутствии комментариев в требуемых местах, ответ принят не будет приниматься!!! 
+            - console.log(json.length, "<length")
             each test in json
                 .ui.piled.segment
                     h4.ui.block.header
                         !=test.test.question.uz+'</br>'+test.test.question.ru
+                    //- - console.log(test.test.answers, "<test")
                     if test.type == "simple"
                         .my-test-body
                             .ui.form
